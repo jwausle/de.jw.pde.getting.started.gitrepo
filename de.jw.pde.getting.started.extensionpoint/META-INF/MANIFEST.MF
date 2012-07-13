@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Extensionpoint
+Bundle-SymbolicName: de.jw.pde.getting.started.extensionpoint;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: de.jw.pde.getting.started.extensionpoint.internal.ExtensionPointActivator
+Require-Bundle: org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: de.jw.pde.getting.started.extensionpoint.api,
+ de.jw.pde.getting.started.extensionpoint.constant
+Bundle-ClassPath: lib/guava-osgi-11.0.1.jar,
+ .
