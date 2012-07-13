@@ -9,15 +9,15 @@ import java.util.Properties;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 
+import com.bosch.ubk.util.iftrue_handle.IfTrueCallback;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 
 import de.jw.pde.getting.started.extensionpoint.api.IGettingStarted;
-import de.jw.strategy.StrategyCallback;
 
 public class ExtentensionPointCommandProvider_ {
 
-	public static final class LoadPropertiesBySystemPropertiesKey implements StrategyCallback<Properties> {
+	public static final class LoadPropertiesBySystemPropertiesKey implements IfTrueCallback<Properties> {
 		private final String optionalPropertiesFileSystemKey;
 
 		public LoadPropertiesBySystemPropertiesKey(String optionalPropertiesFileSystemKey) {
@@ -79,7 +79,7 @@ public class ExtentensionPointCommandProvider_ {
 
 				Properties defaultProperties = gettingStarted.defaultProperties();
 
-				Properties properties = ExtentensionPointCommandProviders.selectProperties(
+				Properties properties = ExtentensionPointCommandProviders.tryLoadPropertiesOrDefault(
 						extensionElement.getAttribute(extensionPointOptionalAttribute), defaultProperties);
 
 				gettingStarted.setUp(properties);

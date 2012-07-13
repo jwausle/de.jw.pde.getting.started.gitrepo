@@ -1,5 +1,7 @@
 package de.jw.pde.getting.started.extensionpoint.internal;
 
+import static de.jw.pde.getting.started.extensionpoint.internal.ExtentensionPointCommandProviders.tryLoadPropertiesOrDefault;
+
 import java.util.Properties;
 
 import com.google.common.base.Function;
@@ -24,7 +26,7 @@ public class IGettingStarted_ {
 	
 			Properties defaultProperties = iGettingStarted.defaultProperties();
 	
-			Properties properties = ExtentensionPointCommandProviders.selectProperties(attributeValue, defaultProperties);
+			Properties properties = tryLoadPropertiesOrDefault(attributeValue, defaultProperties);
 	
 			iGettingStarted.setUp(properties);
 	

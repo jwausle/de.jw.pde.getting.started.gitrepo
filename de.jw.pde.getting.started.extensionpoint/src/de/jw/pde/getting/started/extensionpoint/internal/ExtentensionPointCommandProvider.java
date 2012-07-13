@@ -1,5 +1,6 @@
 package de.jw.pde.getting.started.extensionpoint.internal;
 
+import static com.bosch.support.java.lang.Objects.castStringArgFun;
 import static de.jw.pde.getting.started.extensionpoint.constant.GettingStartedExtensionPointConst.EXTENSION_POINT_OPTIONAL_ATTRIBUTE;
 import static de.jw.pde.getting.started.extensionpoint.constant.GettingStartedExtensionPointConst.EXTENSTION_POINT_ATTRIBUTE_CLASS;
 import static de.jw.pde.getting.started.extensionpoint.internal.ExtensionPointActivator.EXTENSION_POINT_ID;
@@ -26,7 +27,7 @@ import de.jw.pde.getting.started.extensionpoint.constant.GettingStartedExtension
 
 public class ExtentensionPointCommandProvider implements CommandProvider {
 
-	private final class UntypedArgumentDoNothingFun<A,T> implements Function<Object, T> {
+	private final class UntypedArgumentDoNothingFun<A, T> implements Function<Object, T> {
 		private final Function<A, T> doNothing;
 
 		private UntypedArgumentDoNothingFun(Function<A, T> doNothing) {
@@ -35,12 +36,13 @@ public class ExtentensionPointCommandProvider implements CommandProvider {
 
 		@Override
 		public T apply(Object object) {
+			@SuppressWarnings("unchecked")
 			T resultFromTypedFun = doNothing.apply((A) object);
 			return resultFromTypedFun;
 		}
 	}
 
-	private final class TypedDoNothingFun<A> implements Function<A,A> {
+	private final class TypedDoNothingFun<A> implements Function<A, A> {
 		@Override
 		public A apply(A string) {
 			return string;
@@ -66,20 +68,29 @@ public class ExtentensionPointCommandProvider implements CommandProvider {
 
 		final IConfigurationInstanceBuilder<IGettingStarted> builder = IConfigurationInstanceBuilder.<IGettingStarted> create();
 
-		Function<String, IGettingStarted> setUpGettingStartedByPropertiesFileFun = setUpGettingStartedByPropertiesFileFun(builder);
-//		Function<Object, IGettingStarted> castStringArgFun = castStringArgFun(setUpGettingStartedByPropertiesFileFun);
-		Function<Object, IGettingStarted> castStringArgFun = new UntypedArgumentDoNothingFun<String, IGettingStarted>(setUpGettingStartedByPropertiesFileFun);
 		builder//
 				.newInstanceFun(EXTENSTION_POINT_ATTRIBUTE_CLASS)//
-				.addOptionalStringSetter(EXTENSION_POINT_OPTIONAL_ATTRIBUTE, castStringArgFun)//
+				.addOptionalStringSetter(EXTENSION_POINT_OPTIONAL_ATTRIBUTE, cast(setUpGettingStartedByPropertiesFileFun(builder)))//
 		;
 
 		List<IGettingStarted> allGettingStarteds = Lists.transform(Arrays.asList(configurationElementsFor), builder.asFunction());
 		interpreter.println(allGettingStarteds);
 	}
-	
-	public void _cast(CommandInterpreter interpreter){
-		final Function<String,String> doNothing = new TypedDoNothingFun<String>();
+
+	/**
+	 * Helper to cast f(A) -> R to f(Object) -> R. Implicit downcast will do.
+	 * 
+	 * @param toCastFun
+	 *          f(A) -> R
+	 * @return f(Object) -> R
+	 */
+	private Function<Object, IGettingStarted> cast(Function<String, IGettingStarted> toCastFun) {
+		Function<Object, IGettingStarted> castStringArgFun = castStringArgFun(toCastFun);
+		return castStringArgFun;
+	}
+
+	public void _cast(CommandInterpreter interpreter) {
+		final Function<String, String> doNothing = new TypedDoNothingFun<String>();
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		Function<Object, String> castedDoNothing = new UntypedArgumentDoNothingFun(doNothing);
 		interpreter.println(castedDoNothing.apply("doNoting"));
