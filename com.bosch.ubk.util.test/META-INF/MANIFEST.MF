@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test for com.bosch.ubk.util
+Bundle-SymbolicName: com.bosch.ubk.util.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BOSCH
+Fragment-Host: com.bosch.ubk.util;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

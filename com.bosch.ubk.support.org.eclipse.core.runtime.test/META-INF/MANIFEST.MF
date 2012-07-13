@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test for com.bosch.ubk.support.org.eclipse.core.runtime
+Bundle-SymbolicName: com.bosch.ubk.support.org.eclipse.core.runtime.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BOSCH
+Fragment-Host: com.bosch.ubk.support.org.eclipse.core.runtime;bundle-version="0.0.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

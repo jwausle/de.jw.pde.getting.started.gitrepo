@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test for com.bosch.ubk.support.com.google
+Bundle-SymbolicName: com.bosch.ubk.support.com.google.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BOSCH
+Fragment-Host: com.bosch.ubk.support.com.google;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
