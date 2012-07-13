@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Google support
+Bundle-SymbolicName: com.bosch.ubk.support.com.google
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BOSCH
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.bosch.support.com.google.common.base,
+ com.bosch.support.java.lang
+Import-Package: com.google.common.base;version="11.0.1",
+ com.google.common.collect;version="11.0.1"

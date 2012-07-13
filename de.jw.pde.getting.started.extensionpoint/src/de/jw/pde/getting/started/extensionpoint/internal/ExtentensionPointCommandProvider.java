@@ -1,5 +1,10 @@
 package de.jw.pde.getting.started.extensionpoint.internal;
 
+import static de.jw.pde.getting.started.extensionpoint.constant.GettingStartedExtensionPointConst.EXTENSION_POINT_OPTIONAL_ATTRIBUTE;
+import static de.jw.pde.getting.started.extensionpoint.constant.GettingStartedExtensionPointConst.EXTENSTION_POINT_ATTRIBUTE_CLASS;
+import static de.jw.pde.getting.started.extensionpoint.internal.ExtensionPointActivator.EXTENSION_POINT_ID;
+import static de.jw.pde.getting.started.extensionpoint.internal.IGettingStarteds.setUpGettingStartedByPropertiesFileFun;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
@@ -12,6 +17,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.osgi.framework.console.CommandInterpreter;
 import org.eclipse.osgi.framework.console.CommandProvider;
 
+import com.bosch.support.org.eclipse.core.runtime.IConfigurationInstanceBuilder;
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import de.jw.pde.getting.started.extensionpoint.api.IGettingStarted;
@@ -19,24 +26,68 @@ import de.jw.pde.getting.started.extensionpoint.constant.GettingStartedExtension
 
 public class ExtentensionPointCommandProvider implements CommandProvider {
 
+	private final class UntypedArgumentDoNothingFun<A,T> implements Function<Object, T> {
+		private final Function<A, T> doNothing;
+
+		private UntypedArgumentDoNothingFun(Function<A, T> doNothing) {
+			this.doNothing = doNothing;
+		}
+
+		@Override
+		public T apply(Object object) {
+			T resultFromTypedFun = doNothing.apply((A) object);
+			return resultFromTypedFun;
+		}
+	}
+
+	private final class TypedDoNothingFun<A> implements Function<A,A> {
+		@Override
+		public A apply(A string) {
+			return string;
+		}
+	}
+
 	public void _show(CommandInterpreter interpreter) throws CoreException, FileNotFoundException, IOException {
 		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
 
-		IConfigurationElement[] extensionElements = extensionRegistry
-				.getConfigurationElementsFor(ExtensionPointActivator.EXTENSION_POINT_ID);
+		IConfigurationElement[] extensionElements = extensionRegistry.getConfigurationElementsFor(ExtensionPointActivator.EXTENSION_POINT_ID);
 
 		List<IGettingStarted> allGettingStarteds = Lists.transform(Arrays.asList(extensionElements),
 				new ExtentensionPointCommandProvider_.InitGettingStartedFun(GettingStartedExtensionPointConst.EXTENSTION_POINT_ATTRIBUTE_CLASS,
 						GettingStartedExtensionPointConst.EXTENSION_POINT_OPTIONAL_ATTRIBUTE));
-		
+
 		System.out.println(allGettingStarteds);
-		
+
+	}
+
+	public void _show2(CommandInterpreter interpreter) {
+		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+		IConfigurationElement[] configurationElementsFor = extensionRegistry.getConfigurationElementsFor(EXTENSION_POINT_ID);
+
+		final IConfigurationInstanceBuilder<IGettingStarted> builder = IConfigurationInstanceBuilder.<IGettingStarted> create();
+
+		Function<String, IGettingStarted> setUpGettingStartedByPropertiesFileFun = setUpGettingStartedByPropertiesFileFun(builder);
+//		Function<Object, IGettingStarted> castStringArgFun = castStringArgFun(setUpGettingStartedByPropertiesFileFun);
+		Function<Object, IGettingStarted> castStringArgFun = new UntypedArgumentDoNothingFun<String, IGettingStarted>(setUpGettingStartedByPropertiesFileFun);
+		builder//
+				.newInstanceFun(EXTENSTION_POINT_ATTRIBUTE_CLASS)//
+				.addOptionalStringSetter(EXTENSION_POINT_OPTIONAL_ATTRIBUTE, castStringArgFun)//
+		;
+
+		List<IGettingStarted> allGettingStarteds = Lists.transform(Arrays.asList(configurationElementsFor), builder.asFunction());
+		interpreter.println(allGettingStarteds);
+	}
+	
+	public void _cast(CommandInterpreter interpreter){
+		final Function<String,String> doNothing = new TypedDoNothingFun<String>();
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		Function<Object, String> castedDoNothing = new UntypedArgumentDoNothingFun(doNothing);
+		interpreter.println(castedDoNothing.apply("doNoting"));
 	}
 
 	@Override
 	public String getHelp() {
-		return "---" + ExtentensionPointCommandProvider.class.getName()
-				+ " help: no help available. Ask Jan Winter.---\n";
+		return "---" + ExtentensionPointCommandProvider.class.getName() + " help: no help available. Ask Jan Winter.---\n";
 	}
 
 }

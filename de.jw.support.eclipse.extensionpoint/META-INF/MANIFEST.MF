@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Support for org.eclipse.core.runtime package
+Bundle-SymbolicName: com.bosch.ubk.support.org.eclipse.core.runtime
+Bundle-Version: 0.0.1.qualifier
+Require-Bundle: org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: lib/guava-osgi-11.0.1.jar,
+ .
+Import-Package: com.bosch.support.com.google.common.base,
+ com.bosch.support.java.lang,
+ com.bosch.support.org.eclipse.core.runtime,
+ com.google.common.base;version="11.0.1",
+ com.google.common.collect;version="11.0.1"
+Export-Package: com.bosch.support.org.eclipse.core.runtime
