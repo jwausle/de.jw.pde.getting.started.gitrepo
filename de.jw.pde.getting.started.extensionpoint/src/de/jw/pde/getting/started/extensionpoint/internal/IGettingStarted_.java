@@ -1,6 +1,6 @@
 package de.jw.pde.getting.started.extensionpoint.internal;
 
-import static de.jw.pde.getting.started.extensionpoint.internal.ExtentensionPointCommandProviders.tryLoadPropertiesOrDefault;
+import static com.bosch.ubk.util.iftrue_handle.properties.LoadPropertiesBySystemPropertiesKeyCallbacks.tryLoadPropertiesOrDefault;
 
 import java.util.Properties;
 

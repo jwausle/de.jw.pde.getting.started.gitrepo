@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Util for com.bosch.ubk
+Bundle-SymbolicName: com.bosch.ubk.util
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BOSCH
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: com.google.common.base;version="11.0.1"
+Export-Package: com.bosch.ubk.util.iftrue_handle,
+ com.bosch.ubk.util.iftrue_handle.properties

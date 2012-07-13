@@ -6,8 +6,7 @@ Bundle-Version: 0.0.1.qualifier
 Require-Bundle: org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-ClassPath: lib/guava-osgi-11.0.1.jar,
- .
+Bundle-ClassPath: .
 Import-Package: com.bosch.support.com.google.common.base,
  com.bosch.support.java.lang,
  com.bosch.support.org.eclipse.core.runtime,

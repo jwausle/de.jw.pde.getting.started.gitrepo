@@ -1,45 +1,17 @@
 package de.jw.pde.getting.started.extensionpoint.internal;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 
-import com.bosch.ubk.util.iftrue_handle.IfTrueCallback;
+import com.bosch.ubk.util.iftrue_handle.properties.LoadPropertiesBySystemPropertiesKeyCallbacks;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 
 import de.jw.pde.getting.started.extensionpoint.api.IGettingStarted;
 
 public class ExtentensionPointCommandProvider_ {
-
-	public static final class LoadPropertiesBySystemPropertiesKey implements IfTrueCallback<Properties> {
-		private final String optionalPropertiesFileSystemKey;
-
-		public LoadPropertiesBySystemPropertiesKey(String optionalPropertiesFileSystemKey) {
-			this.optionalPropertiesFileSystemKey = optionalPropertiesFileSystemKey;
-		}
-
-		@Override
-		public Properties callback() {
-			String pathToPropertiesFile = System.getProperty(optionalPropertiesFileSystemKey);
-			File file = new File(pathToPropertiesFile);
-			Properties properties = new Properties();
-			try {
-				properties.load(new FileInputStream(file));
-				return properties;
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-	}
 
 	public static final class GetExtensionPointInstanceFun<T> implements Function<IConfigurationElement, T> {
 		private final String attributeKey;
@@ -79,7 +51,7 @@ public class ExtentensionPointCommandProvider_ {
 
 				Properties defaultProperties = gettingStarted.defaultProperties();
 
-				Properties properties = ExtentensionPointCommandProviders.tryLoadPropertiesOrDefault(
+				Properties properties = LoadPropertiesBySystemPropertiesKeyCallbacks.tryLoadPropertiesOrDefault(
 						extensionElement.getAttribute(extensionPointOptionalAttribute), defaultProperties);
 
 				gettingStarted.setUp(properties);

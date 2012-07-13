@@ -9,10 +9,11 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.jw.pde.getting.started.extensionpoint.api,
  de.jw.pde.getting.started.extensionpoint.constant
-Bundle-ClassPath: lib/guava-osgi-11.0.1.jar,
- .
+Bundle-ClassPath: .
 Import-Package: com.bosch.support.com.google.common.base,
  com.bosch.support.java.lang,
  com.bosch.support.org.eclipse.core.runtime,
+ com.bosch.ubk.util.iftrue_handle,
+ com.bosch.ubk.util.iftrue_handle.properties,
  com.google.common.base;version="11.0.1",
  com.google.common.collect;version="11.0.1"
