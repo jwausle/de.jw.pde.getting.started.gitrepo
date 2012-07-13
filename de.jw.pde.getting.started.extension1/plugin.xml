@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.jw.pde.getting.started.extensionpoint.sample">
+      <de.jw.pde.getting.started.extensionpoint.sample.element
+            de.jw.pde.getting.started.extensionpoint.sample.element.attribute.java="de.jw.pde.getting.started.extension1.internal.impl.GettingStartedExtension1Impl"
+            de.jw.pde.getting.started.extensionpoint.sample.optional.attribute="path-to-properties-file">
+      </de.jw.pde.getting.started.extensionpoint.sample.element>
+   </extension>
+
+</plugin>
