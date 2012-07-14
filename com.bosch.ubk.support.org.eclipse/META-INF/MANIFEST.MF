@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Support for org.eclipse.core.runtime package
-Bundle-SymbolicName: com.bosch.ubk.support.org.eclipse.core.runtime
+Bundle-SymbolicName: com.bosch.ubk.support.org.eclipse
 Bundle-Version: 0.0.1.qualifier
 Require-Bundle: org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
