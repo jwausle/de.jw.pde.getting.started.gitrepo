@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Fragment
+Bundle-SymbolicName: com.bosch.ubk.test.sample.host.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BOSCH
+Fragment-Host: com.bosch.ubk.test.sample.host;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.junit;version="4.8.2"
+Bundle-ClassPath: .,
+ lib/org.easymock-3.0.0.jar,
+ lib/cglib-nodep-2.2.2.jar
