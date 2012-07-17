@@ -13,7 +13,9 @@ public class HasInternalApiDependencyToUncleanedImplTest2 {
 		final String myLocalTestPath = "my/local/test/path/";
 		
 		final InternalApiDependency internalApiDependency = Mockito.mock(InternalApiDependency.class);
+		
 		String expectedPath = myLocalTestPath + LongRunningRuntimeImplUncleaned.CONSTANT_PATH_SUFFIX;
+		
 		Mockito.when(internalApiDependency.getPath()).thenReturn(expectedPath);
 
 		class OverrideGetterFromsService extends HasInternalApiDependencyImpl {
