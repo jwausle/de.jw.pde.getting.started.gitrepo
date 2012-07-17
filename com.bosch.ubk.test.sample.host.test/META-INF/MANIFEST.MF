@@ -9,4 +9,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.junit;version="4.8.2"
 Bundle-ClassPath: .,
  lib/org.easymock-3.0.0.jar,
- lib/cglib-nodep-2.2.2.jar
+ lib/cglib-nodep-2.2.2.jar,
+ lib/mockito-all-1.9.5-rc1.jar
